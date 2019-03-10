@@ -184,7 +184,7 @@ namespace SortAll {
     }
 
     /**
-     * 归并排序
+     * 归并排序 自顶向下
      * @tparam T
      * @param arr
      * @param n
@@ -193,6 +193,22 @@ namespace SortAll {
     void mergeSort(T *arr, int n) {
 
         __mergeSort<T>(arr, 0, n - 1);
+    }
+
+    /**
+     * 自底向上的归并排序
+     * @tparam T
+     * @param arr
+     * @param n
+     */
+    template<typename T>
+    void mergeSortBU(T *arr, int n) {
+        // 首先设置归并的间距1, 2, 4, 8 ...
+        for (int sz = 1; sz <= n; sz += sz) {
+            for (int i = 0; i + sz < n; i += sz + sz) {
+                __merge(arr, i, i + sz - 1, min(i + sz + sz - 1, n - 1));
+            }
+        }
     }
 };
 
