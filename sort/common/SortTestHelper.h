@@ -30,6 +30,12 @@ namespace SortTestHelper {
         return arr;
     }
 
+    /**
+     * 产生一个近乎有序的随机数组
+     * @param n
+     * @param swapTimes
+     * @return
+     */
     int *generateNearlyOrderedArray(int n, int swapTimes) {
         int *arr = new int[n];
         for (int i = 0; i < n; i++) {
@@ -92,6 +98,13 @@ namespace SortTestHelper {
         cout << sortName << ": " << double(endTime - startTime) / CLOCKS_PER_SEC << " s" << endl;
     }
 
+    /**
+     * 复制一个数组(重新申请空间，值相同)
+     * @tparam T
+     * @param a
+     * @param n
+     * @return
+     */
     template<typename T>
     T *copyIntArray(T a[], int n) {
         T *arr = new T[n];
