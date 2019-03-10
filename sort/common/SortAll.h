@@ -52,6 +52,24 @@ namespace SortAll {
     }
 
     /**
+     * 插入排序（用于归并排序优化）
+     * @tparam T
+     * @param arr
+     * @param l
+     * @param r
+     */
+    template<typename T>
+    void insertSortForMerge(T *arr, int l, int r) {
+        for (int i = l + 1; i <= r; i++) {
+            T e = arr[i];
+            int j;
+            for (j = i; j > l && arr[j - 1] > e; j--)
+                arr[j] = arr[j - 1];
+            arr[j] = e;
+        }
+    }
+
+    /**
      * 希尔排序 的 插入排序部分
      * @tparam T
      * @param arr
@@ -150,8 +168,12 @@ namespace SortAll {
      */
     template<typename T>
     void __mergeSort(T *arr, int l, int r) {
-        if (l >= r)
+        // if (l >= r)
+        //     return;
+        if (r - l <= 15) {
+            insertSortForMerge<T>(arr, l, r);
             return;
+        }
         // l+r可能会出现溢出的问题，稍后做修改
         int mid = (l + r) / 2;
         __mergeSort<T>(arr, l, mid);
