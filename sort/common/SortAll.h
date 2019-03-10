@@ -32,7 +32,7 @@ void selectionSort(T arr[], int n) {
 }
 
 /**
- * 插入排序 O(n^2)
+ * 插入排序 时间复杂度  O(n^2) 在一定有序的情况下可能达到近乎 O(n)
  * @tparam T
  * @param arr
  * @param n
@@ -57,7 +57,7 @@ void insertSort(T arr[], int n) {
  * @param pos
  */
 template<typename T>
-void insert_sort_for_shell(T arr[], int gap, int pos) {
+void insertSortForShell(T arr[], int gap, int pos) {
     T temp = arr[pos];
     int i;
     for (i = pos; i >= gap && arr[i - gap] > temp; i -= gap) {
@@ -73,10 +73,34 @@ void insert_sort_for_shell(T arr[], int gap, int pos) {
  * @param n
  */
 template<typename T>
-void shell_sort(T arr[], int n) {
+void shellSort(T arr[], int n) {
     for (int gap = n / 2; gap > 0; gap /= 2) {
         for (int i = gap; i < n; i++) {
-            insert_sort_for_shell<T>(arr, gap, i);
+            insertSortForShell<T>(arr, gap, i);
+        }
+    }
+}
+
+/**
+ * 冒泡排序 时间复杂度 O(n^2)
+ * @tparam T
+ * @param arr
+ * @param n
+ */
+template<typename T>
+void bubbleSort(T *arr, int n) {
+    // 设置记录判断是否排过序的变量
+    int flag;
+    for (int i = 0; i < n; i++) {
+        flag = 0;
+        for (int j = n-1; j > i; j--) {
+            if (arr[j] < arr[j - 1]) {
+                swap(arr[j], arr[j - 1]);
+                flag = 1;
+            }
+        }
+        if (flag == 0){
+            break;
         }
     }
 }

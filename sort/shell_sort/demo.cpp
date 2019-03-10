@@ -13,7 +13,7 @@ int main(void) {
     int *arr = SortTestHelper::generateNearlyOrderedArray(n, 30);
     int *arr1 = SortTestHelper::copyIntArray(arr, n);
     int *arr2 = SortTestHelper::copyIntArray(arr, n);
-    SortTestHelper::testSort<int>("Shell Sort", shell_sort, arr, n);
+    SortTestHelper::testSort<int>("Shell Sort", shellSort, arr, n);
     SortTestHelper::testSort<int>("insert Sort", insertSort, arr2, n);
     SortTestHelper::testSort<int>("Selection Sort", selectionSort, arr1, n);
     delete[] arr;
