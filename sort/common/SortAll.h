@@ -184,7 +184,7 @@ namespace SortAll {
     }
 
     /**
-     * 归并排序 自顶向下
+     * 归并排序 自顶向下 O(nlogn)
      * @tparam T
      * @param arr
      * @param n
@@ -209,6 +209,66 @@ namespace SortAll {
                 __merge(arr, i, i + sz - 1, min(i + sz + sz - 1, n - 1));
             }
         }
+    }
+
+    /**
+     * 快速排序具体实现部分
+     * @tparam T
+     * @param arr
+     * @param l
+     * @param r
+     * @return a position(int)
+     */
+    template<typename T>
+    int __partition(T *arr, int l, int r) {
+
+        swap(arr[l], arr[rand() % (r - l + 1) + l]);
+
+        T v = arr[l];
+        int j = l;
+        for (int i = l + 1; i <= r; i++) {
+            if (arr[i] < v) {
+                swap(arr[j + 1], arr[i]);
+                j++;
+            }
+        }
+
+        swap(arr[l], arr[j]);
+        return j;
+    }
+
+    /**
+     * 快速排序子方法(递归)
+     * @tparam T
+     * @param arr
+     * @param l
+     * @param r
+     */
+    template<typename T>
+    void __quickSort(T *arr, int l, int r) {
+        // if (l >= r) {
+        //     return;
+        // }
+        if (r - l <= 15) {
+            insertSortForMerge(arr, l, r);
+            return;
+        }
+
+        int p = __partition(arr, l, r);
+        __quickSort(arr, l, p - 1);
+        __quickSort(arr, p + 1, r);
+    }
+
+    /**
+     * 快速排序
+     * @tparam T
+     * @param arr
+     * @param n
+     */
+    template<typename T>
+    void quickSort(T *arr, int n) {
+        srand(time(NULL));
+        __quickSort(arr, 0, n - 1);
     }
 };
 
